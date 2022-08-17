@@ -103,7 +103,7 @@ void snake_moveSnake()
     {
         if (snakePart->x == 0)
         {
-            snakePart->x = MAP_WIDTH -1;
+            snakePart->x = MAP_WIDTH - 1;
         }
         else
         {
@@ -134,7 +134,7 @@ void snake_moveSnake()
     }
     else if (snake.direction == DIR_DOWN)
     {
-        if (snakePart->y == MAP_HEIGHT -1)
+        if (snakePart->y == MAP_HEIGHT - 1)
         {
             snakePart->y = 0;
         }
@@ -214,9 +214,10 @@ void snake_initSnake()
 void snake_drawSnake()
 {
     snakePart = snake.parts;
-    for (ii = 0; ii < snake.length; ii++)
+    snakePart++; // Skip head because its drawn as a sprite
+    for (ii = 0; ii < snake.length - 1; ii++)
     {
-        set_bkg_tile_xy(snakePart->x, snakePart->y, ii == 0 ? TILE_HEAD : TILE_BODY);
+        set_bkg_tile_xy(snakePart->x, snakePart->y, TILE_BODY);
         snakePart++;
     }
 
@@ -265,5 +266,32 @@ void snake_clearScreen()
         {
             set_bkg_tile_xy(i, j, 0);
         }
+    }
+}
+
+void snake_drawHead()
+{
+    head = snake.parts;
+    move_sprite(SPRITE_HEAD, 8 + (head->x << 3), 16 + (head->y << 3));
+
+    if (snake.direction == DIR_UP)
+    {
+        set_sprite_tile(SPRITE_HEAD, 0);
+        set_sprite_prop(SPRITE_HEAD, 0);
+    }
+    if (snake.direction == DIR_DOWN)
+    {
+        set_sprite_tile(SPRITE_HEAD, 0);
+        set_sprite_prop(SPRITE_HEAD, S_FLIPY);
+    }
+    if (snake.direction == DIR_RIGHT)
+    {
+        set_sprite_tile(SPRITE_HEAD, 1);
+        set_sprite_prop(SPRITE_HEAD, 0);
+    }
+    if (snake.direction == DIR_LEFT)
+    {
+        set_sprite_tile(SPRITE_HEAD, 1);
+        set_sprite_prop(0, S_FLIPX);
     }
 }

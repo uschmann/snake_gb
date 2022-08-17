@@ -13,6 +13,9 @@
 #define SNAKE_MAX_LENGTH 300
 #define SNAKE_START_DIR DIR_LEFT
 
+
+#define SPRITE_HEAD 0
+
 #define TILE_BODY 1
 #define TILE_FRUIT 2
 #define TILE_HEAD 3
@@ -55,6 +58,7 @@ uint8_t snake_hasEatenFruit();
 
 void snake_placeFruit();
 void snake_drawFruit();
+void snake_drawHead();
 void snake_clearScreen();
 
 #endif

@@ -1,8 +1,7 @@
 #include <gb/gb.h>
 #include <stdint.h>
-#include "../res/dungeon_map.h"
-#include "../res/dungeon_tiles.h"
 #include "../res/snake_tiles.h"
+#include "../res/snake_sprites.h"
 #include "snake.h"
 #include "globals.h"
 #include "state.h"
@@ -16,6 +15,7 @@ void init_gfx()
 {
     // Load Background tiles and then map
     set_bkg_data(0, 4u, snake_tiles);
+    set_sprite_data(0, 2u, snake_sprites);
 
     for (i = 0; i < 20; i++)
     {
@@ -26,7 +26,9 @@ void init_gfx()
     }
 
     // Turn the background map on to make it visible
-    SHOW_BKG;
+    SHOW_BKG; 
+    SHOW_SPRITES;
+
 }
 
 void main(void)
