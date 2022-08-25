@@ -1,3 +1,3 @@
 # Snake GB
 
-A simple snake game for the original gambeoy classic writtne in c.
+A simple snake game for the original gambeoy classic written in c.
