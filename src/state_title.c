@@ -14,7 +14,7 @@ void state_title_init()
 void state_title_update()
 {
     waitpad(0xFF);
-    waitpadup();
+    waitpad(J_START);
     seed = DIV_REG;
     initarand(seed);
 
