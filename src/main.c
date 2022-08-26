@@ -1,4 +1,5 @@
 #include <gb/gb.h>
+#include <gbdk/font.h>
 #include <stdint.h>
 #include "../res/snake_tiles.h"
 #include "../res/snake_sprites.h"
@@ -13,7 +14,9 @@ extern uint8_t currentState;
 
 void init_gfx()
 {
-    // Load Background tiles and then map
+    font_init();
+    font_set(font_load(font_spect));
+
     set_bkg_data(0, 4u, snake_tiles);
     set_sprite_data(0, 2u, snake_sprites);
 
@@ -25,8 +28,7 @@ void init_gfx()
         }
     }
 
-    // Turn the background map on to make it visible
-    SHOW_BKG; 
+    SHOW_BKG;
     SHOW_SPRITES;
 
 }
@@ -45,12 +47,14 @@ void main(void)
 
         switch (currentState)
         {
+        // Title
         case STATE_TITLE_INIT:
             state_title_init();
             break;
         case STATE_TITLE:
             state_title_update();
             break;
+        // Game
         case STATE_GAME_INIT:
             state_game_init();
             break;

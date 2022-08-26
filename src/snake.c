@@ -1,4 +1,5 @@
 #include "snake.h"
+#include <gb/bcd.h>
 #include <stdlib.h>
 #include "state.h"
 
@@ -10,6 +11,11 @@ extern uint8_t currentState;
 uint8_t hasMoved = 0;
 uint8_t levelCounter = MAX_LEVEL_COUNTER;
 uint8_t isGameOver = 0;
+
+uint16_t score = 0;
+uint8_t scoreLen = 0;
+unsigned char scoreBuf[10];
+BCD scoreBcd  = MAKE_BCD(00000000);
 
 SnakePart *snakePart;
 SnakePart *startSnakePart;
@@ -149,6 +155,7 @@ void snake_moveSnake()
 
     if (snake_hasEatenFruit())
     {
+        score ++;
         levelCounter--;
         if (levelCounter == 0)
         {
@@ -190,6 +197,7 @@ uint8_t snake_hasEatenSelf()
 
 void snake_initSnake()
 {
+    score = 0;
     isGameOver = 0;
 
     snake.length = SNAKE_START_LENGTH;
@@ -209,6 +217,13 @@ void snake_initSnake()
         snakePart++;
         startSnakePart++;
     }
+}
+
+void snake_drawScore()
+{
+    uint2bcd(score, &scoreBcd);
+    bcd2text(&scoreBcd, 0x10, scoreBuf);
+    set_bkg_tiles(SCORE_POS_X, SCORE_POS_Y, 3, 1, scoreBuf + 5 );
 }
 
 void snake_drawSnake()

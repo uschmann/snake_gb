@@ -20,4 +20,5 @@ void state_game_update()
     snake_drawFruit();
     snake_drawSnake();
     snake_drawHead();
+    snake_drawScore();
 }

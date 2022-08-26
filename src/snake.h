@@ -2,6 +2,7 @@
 #define _SNAKE_H
 
 #include <gb/gb.h>
+#include <gbdk/bcd.h>
 
 #define DIR_UP 1
 #define DIR_RIGHT 2
@@ -22,6 +23,9 @@
 
 #define MAP_WIDTH 20
 #define MAP_HEIGHT 18
+
+#define SCORE_POS_X 0
+#define SCORE_POS_Y 0
 
 #define MIN_MOVE_COUNTER 3
 #define MAX_LEVEL_COUNTER 3
@@ -50,6 +54,7 @@ uint8_t snake_hasEatenSelf();
 
 void snake_initSnake();
 void snake_drawSnake();
+void snake_drawScore();
 void snake_moveSnake();
 void snake_readPad();
 void snake_update();
