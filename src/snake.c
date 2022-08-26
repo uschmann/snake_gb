@@ -18,7 +18,6 @@ unsigned char scoreBuf[10];
 BCD scoreBcd  = MAKE_BCD(00000000);
 
 SnakePart *snakePart;
-SnakePart *startSnakePart;
 SnakePart *snakePartSrc;
 SnakePart *snakePartDest;
 SnakePart *head;
@@ -35,16 +34,6 @@ Snake snake = {
 Fruit fruit = {
     .x = 3,
     .y = 3};
-
-const SnakePart startSnakeParts[] = {
-    {5, 5},
-    {6, 5},
-    {7, 5},
-    {8, 5},
-    {9, 5},
-    {10, 5},
-    {11, 5},
-};
 
 void snake_update()
 {
@@ -206,16 +195,14 @@ void snake_initSnake()
     snake.direction = SNAKE_START_DIR;
 
     snakePart = snake.parts;
-    startSnakePart = startSnakeParts;
 
     snake_clearScreen();
 
     for (i = 0; i < snake.length; i++)
     {
-        snakePart->x = startSnakePart->x;
-        snakePart->y = startSnakePart->y;
+        snakePart->x = SNAKE_START_X;
+        snakePart->y = SNAKE_START_Y;
         snakePart++;
-        startSnakePart++;
     }
 }
 
